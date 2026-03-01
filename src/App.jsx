@@ -1,8 +1,22 @@
 import { Menu, X, MessageCircle, Phone, Instagram, ArrowRight, Code, Zap, Palette, Rocket } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import emailjs from '@emailjs/browser'
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    businessName: '',
+    message: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null)
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init('tPch0atXkUD7a0czq') // Replace with your actual public key
+  }, [])
 
   const currentYear = new Date().getFullYear()
 
@@ -12,6 +26,46 @@ export default function App() {
       element.scrollIntoView({ behavior: 'smooth' })
       setMobileMenuOpen(false)
     }
+  }
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus(null)
+
+    try {
+      const response = await emailjs.send(
+        'service_odm9dpi', // Replace with your actual service ID
+        'template_l4a23hv', // Replace with your actual template ID
+        {
+          to_email: 'adeoyesemilore2007@gmail.com',
+          from_name: formData.name,
+          from_email: formData.email,
+          business_name: formData.businessName,
+          message: formData.message,
+        }
+      )
+
+      if (response.status === 200) {
+        setSubmitStatus({ type: 'success', message: 'Email sent successfully! I\'ll get back to you soon.' })
+        setFormData({ name: '', email: '', businessName: '', message: '' })
+        setTimeout(() => setSubmitStatus(null), 5000)
+      }
+    } catch (error) {
+      console.error('EmailJS error:', error)
+      setSubmitStatus({ type: 'error', message: 'Failed to send email. Please try again.' })
+      setTimeout(() => setSubmitStatus(null), 5000)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
   }
 
   const services = [
@@ -258,7 +312,7 @@ export default function App() {
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             {/* WhatsApp */}
             <a
-              href="https://wa.me/?text=I%27d%20like%20to%20discuss%20building%20a%20website%20for%20my%20business"
+              href="https://wa.me/2348136151937"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 hover:border-green-500 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 group"
@@ -268,12 +322,12 @@ export default function App() {
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">WhatsApp</h3>
               <p className="text-gray-600 mb-4">Message me directly</p>
-              <span className="text-green-600 font-semibold group-hover:text-green-700">Start Chat</span>
+              <span className="text-green-600 font-semibold group-hover:text-green-700">08136151937</span>
             </a>
 
             {/* Phone */}
             <a
-              href="tel:+15551234567"
+              href="tel:+2348136151937"
               className="bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-200 hover:border-blue-500 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 group"
             >
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 group-hover:bg-blue-500 text-blue-600 group-hover:text-white mb-4 transition-all duration-300">
@@ -281,12 +335,12 @@ export default function App() {
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Phone</h3>
               <p className="text-gray-600 mb-4">Call me anytime</p>
-              <span className="text-blue-600 font-semibold group-hover:text-blue-700">+1 (555) 123-4567</span>
+              <span className="text-blue-600 font-semibold group-hover:text-blue-700">08136151937</span>
             </a>
 
             {/* Instagram */}
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/semzy00000/"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-br from-pink-50 to-rose-50 border-2 border-pink-200 hover:border-pink-500 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 group"
@@ -296,45 +350,65 @@ export default function App() {
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Instagram</h3>
               <p className="text-gray-600 mb-4">Follow my work</p>
-              <span className="text-pink-600 font-semibold group-hover:text-pink-700">@webcraft.design</span>
+              <span className="text-pink-600 font-semibold group-hover:text-pink-700">@semzy00000</span>
             </a>
           </div>
 
           {/* Email Form */}
           <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl border-2 border-blue-200 p-8 md:p-12">
             <h3 className="text-3xl font-bold text-gray-900 mb-8">Or Send Me An Email</h3>
-            <form className="space-y-6">
+
+            {submitStatus && (
+              <div className={`mb-6 p-4 rounded-xl ${submitStatus.type === 'success' ? 'bg-green-100 border-2 border-green-500 text-green-700' : 'bg-red-100 border-2 border-red-500 text-red-700'}`}>
+                {submitStatus.message}
+              </div>
+            )}
+
+            <form onSubmit={handleContactSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <input
                   type="text"
+                  name="name"
                   placeholder="Your Name"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   className="px-6 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-lg transition text-lg"
                   required
                 />
                 <input
                   type="email"
+                  name="email"
                   placeholder="Your Email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   className="px-6 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-lg transition text-lg"
                   required
                 />
               </div>
               <input
                 type="text"
+                name="businessName"
                 placeholder="Business Name"
+                value={formData.businessName}
+                onChange={handleInputChange}
                 className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-lg transition text-lg"
                 required
               />
               <textarea
+                name="message"
                 placeholder="Tell me about your project..."
                 rows="6"
+                value={formData.message}
+                onChange={handleInputChange}
                 className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-lg transition text-lg resize-none"
                 required
               ></textarea>
               <button
                 type="submit"
-                className="w-full md:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-lg"
+                disabled={isSubmitting}
+                className="w-full md:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>
