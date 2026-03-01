@@ -1,38 +1,10 @@
-import { Menu, X, MessageCircle, Phone, Instagram, ArrowRight, CheckCircle } from 'lucide-react'
+import { Menu, X, MessageCircle, Phone, Instagram, ArrowRight, Code, Zap, Palette, Rocket } from 'lucide-react'
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const currentYear = new Date().getFullYear()
-
-  // Animation variants
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-  }
-
-  const fadeInDown = {
-    hidden: { opacity: 0, y: -20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-  }
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  }
-
-  const scaleIn = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } },
-  }
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id)
@@ -44,56 +16,68 @@ export default function App() {
 
   const services = [
     {
-      title: 'Quality Service',
-      description: 'Consistently deliver excellence that exceeds expectations every time',
-      icon: '⭐',
+      title: 'Custom Design',
+      description: 'Beautiful, unique layouts tailored to your brand and vision',
+      icon: <Palette className="w-8 h-8" />,
+      color: 'from-blue-500 to-cyan-500',
     },
     {
-      title: 'Expert Team',
-      description: 'Skilled professionals dedicated to your satisfaction and success',
-      icon: '👥',
+      title: 'Lightning Fast',
+      description: 'Optimized performance and responsive design on all devices',
+      icon: <Zap className="w-8 h-8" />,
+      color: 'from-yellow-500 to-orange-500',
     },
     {
-      title: 'Always Available',
-      description: 'Responsive support whenever you need us, every step of the way',
-      icon: '🤝',
+      title: 'Easy to Update',
+      description: 'Simple content management so you control your site',
+      icon: <Code className="w-8 h-8" />,
+      color: 'from-purple-500 to-pink-500',
+    },
+    {
+      title: 'Deploy Ready',
+      description: 'Fully deployed and live, ready to start attracting customers',
+      icon: <Rocket className="w-8 h-8" />,
+      color: 'from-green-500 to-emerald-500',
     },
   ]
 
   return (
-    <div className="bg-white text-gray-900 scroll-smooth">
+    <div className="bg-white text-gray-900">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
+      <nav className="sticky top-0 z-50 bg-white shadow-lg border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Your Business</h1>
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                <Code className="w-6 h-6 text-white" />
+              </div>
+              <h1 className="text-2xl font-bold text-gray-900">WebCraft</h1>
             </div>
 
             {/* Desktop Menu */}
             <div className="hidden md:block">
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1">
                 <button
                   onClick={() => scrollToSection('hero')}
-                  className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:text-blue-600 transition duration-200"
+                  className="px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200"
                 >
                   Home
                 </button>
                 <button
                   onClick={() => scrollToSection('about')}
-                  className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:text-blue-600 transition duration-200"
+                  className="px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200"
                 >
                   About
                 </button>
                 <button
                   onClick={() => scrollToSection('services')}
-                  className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:text-blue-600 transition duration-200"
+                  className="px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200"
                 >
                   Services
                 </button>
                 <button
                   onClick={() => scrollToSection('contact')}
-                  className="px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:text-blue-600 transition duration-200"
+                  className="px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200"
                 >
                   Contact
                 </button>
@@ -104,7 +88,7 @@ export default function App() {
             <div className="md:hidden">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-md hover:bg-blue-50"
+                className="inline-flex items-center justify-center p-2 rounded-lg hover:bg-gray-100"
               >
                 {mobileMenuOpen ? (
                   <X className="h-6 w-6" />
@@ -118,29 +102,29 @@ export default function App() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-100">
+          <div className="md:hidden border-t border-gray-200">
             <div className="px-4 py-4 space-y-2">
               <button
                 onClick={() => scrollToSection('hero')}
-                className="block w-full text-left px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:text-blue-600 transition"
+                className="block w-full text-left px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
               >
                 Home
               </button>
               <button
                 onClick={() => scrollToSection('about')}
-                className="block w-full text-left px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:text-blue-600 transition"
+                className="block w-full text-left px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
               >
                 About
               </button>
               <button
                 onClick={() => scrollToSection('services')}
-                className="block w-full text-left px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:text-blue-600 transition"
+                className="block w-full text-left px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
               >
                 Services
               </button>
               <button
                 onClick={() => scrollToSection('contact')}
-                className="block w-full text-left px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 hover:text-blue-600 transition"
+                className="block w-full text-left px-4 py-2 rounded-lg text-sm font-semibold text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
               >
                 Contact
               </button>
@@ -150,33 +134,42 @@ export default function App() {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-indigo-50 px-4 py-20">
-        <motion.div
-          className="max-w-4xl mx-auto text-center space-y-8"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <motion.div className="space-y-4" variants={fadeInUp}>
-            <h2 className="text-5xl md:text-7xl font-bold text-gray-900 leading-tight tracking-tight">
-              Exceptional Service <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Delivered</span>
+      <section id="hero" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 px-4 py-20 overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute top-20 right-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute -bottom-8 left-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-2000"></div>
+
+        <div className="relative max-w-5xl mx-auto text-center space-y-8">
+          <div className="space-y-4">
+            <p className="text-blue-600 font-bold text-lg">Custom Web Solutions</p>
+            <h2 className="text-5xl md:text-7xl font-bold text-gray-900 leading-tight">
+              Beautiful Websites for Small Businesses
             </h2>
-          </motion.div>
-          <motion.p variants={fadeInUp} className="text-lg md:text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-light">
-            We're committed to delivering quality results and building lasting relationships with our clients.
-          </motion.p>
-          <motion.a
-            variants={scaleIn}
-            href="https://wa.me/?text=I%27d%20like%20to%20learn%20more%20about%20your%20services"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white py-4 px-10 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-2xl"
-          >
-            <MessageCircle className="h-5 w-5" />
-            Get in Touch
-          </motion.a>
-        </motion.div>
+          </div>
+
+          <p className="text-lg md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            I build <span className="font-bold text-blue-600">custom, modern websites</span> that help your business stand out online. Fast, responsive, and easy for you to update.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+            <a
+              href="https://wa.me/?text=I%27d%20like%20to%20discuss%20building%20a%20website%20for%20my%20business"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 px-8 rounded-xl font-bold text-lg transition duration-300 transform hover:scale-105 hover:shadow-2xl"
+            >
+              <MessageCircle className="w-5 h-5" />
+              Let's Talk
+            </a>
+            <button
+              onClick={() => scrollToSection('services')}
+              className="inline-flex items-center justify-center gap-2 bg-white border-2 border-gray-300 hover:border-blue-600 text-gray-900 hover:text-blue-600 py-4 px-8 rounded-xl font-bold text-lg transition duration-300 transform hover:scale-105 hover:shadow-lg"
+            >
+              See My Work
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
       </section>
 
       {/* About Section */}
@@ -188,31 +181,41 @@ export default function App() {
           </div>
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
-              <p className="text-lg text-gray-700 leading-relaxed font-light">
-                We pride ourselves on delivering exceptional service with integrity and professionalism. Our team is passionate about understanding your unique needs and providing solutions that truly make a difference.
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Who I Help</h2>
+              <p className="text-xl text-gray-700 leading-relaxed">
+                Small business owners who need a professional online presence but don't want to deal with the technical complexity. Whether you're a salon, shop, consultant, or service provider—a modern website can transform how clients find and trust you.
               </p>
-              <p className="text-lg text-gray-700 leading-relaxed font-light">
-                With years of experience, we've built a reputation for reliability and excellence. We're not just a service provider—we're your partner in success, committed to your satisfaction every step of the way.
+              <p className="text-xl text-gray-700 leading-relaxed">
+                I create <span className="font-bold text-blue-600">custom, modern websites</span> that reflect your brand, load lightning-fast, and are simple enough for you to update without coding knowledge.
               </p>
-              <ul className="space-y-4 pt-4">
-                <li className="flex items-center gap-4">
-                  <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
-                  <span className="text-gray-700 font-medium">Proven expertise you can trust</span>
-                </li>
-                <li className="flex items-center gap-4">
-                  <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
-                  <span className="text-gray-700 font-medium">Results that matter</span>
-                </li>
-                <li className="flex items-center gap-4">
-                  <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
-                  <span className="text-gray-700 font-medium">Your success is our priority</span>
-                </li>
-              </ul>
+              <div className="space-y-4 pt-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-white text-sm font-bold">✓</span>
+                  </div>
+                  <span className="text-lg text-gray-700">Fully custom designs tailored to your brand</span>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-white text-sm font-bold">✓</span>
+                  </div>
+                  <span className="text-lg text-gray-700">Mobile-responsive and optimized for speed</span>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-white text-sm font-bold">✓</span>
+                  </div>
+                  <span className="text-lg text-gray-700">Deployed and live, ready to attract customers</span>
+                </div>
+              </div>
             </div>
-            <div className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-2xl h-96 flex items-center justify-center shadow-xl">
-              <div className="text-center">
-                <p className="text-8xl mb-4">�</p>
-                <p className="text-gray-700 font-semibold text-lg">Dedicated to Your Success</p>
+            <div className="relative">
+              <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl p-1 hover:shadow-2xl transition-shadow duration-300">
+                <div className="bg-white rounded-2xl p-8 text-center space-y-4">
+                  <div className="text-6xl">💻</div>
+                  <h3 className="text-2xl font-bold text-gray-900">Modern Web Design</h3>
+                  <p className="text-gray-600">Built with the latest technologies and best practices for performance</p>
+                </div>
               </div>
             </div>
           </div>
@@ -222,39 +225,25 @@ export default function App() {
       {/* Services Section */}
       <section id="services" className="py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            className="text-center mb-20"
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Services</h3>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full"></div>
-          </motion.div>
-          <motion.div
-            className="grid md:grid-cols-3 gap-8"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">What I Offer</h2>
+            <p className="text-xl text-gray-600">Everything you need for a professional online presence</p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-6">
             {services.map((service, index) => (
-              <motion.div
+              <div
                 key={index}
-                variants={scaleIn}
-                className="bg-white rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 p-10 text-center border border-gray-100 hover:border-blue-100"
+                className="bg-white rounded-2xl border-2 border-gray-100 hover:border-blue-400 p-8 text-center transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
               >
-                <div className="text-6xl mb-6 transform group-hover:scale-110 transition-transform">{service.icon}</div>
-                <h4 className="text-xl font-bold text-gray-900 mb-4">{service.title}</h4>
-                <p className="text-gray-600 mb-8 font-light leading-relaxed">{service.description}</p>
-                <button className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-200">
-                  Learn More
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </motion.div>
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 group-hover:from-blue-500 group-hover:to-purple-500 text-gray-700 group-hover:text-white mb-6 transition-all duration-300">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{service.description}</p>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -262,126 +251,137 @@ export default function App() {
       <section id="contact" className="py-24 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Get In Touch</h3>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full"></div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Ready to Get Started?</h2>
+            <p className="text-xl text-gray-600">Let's discuss your website project</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {/* Phone */}
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-10 text-center hover:shadow-xl transition-all duration-300 border border-blue-100 hover:border-blue-300">
-              <Phone className="h-14 w-14 text-blue-600 mx-auto mb-6" />
-              <h4 className="text-xl font-bold text-gray-900 mb-3">Phone</h4>
-              <a href="tel:+1234567890" className="text-gray-700 hover:text-blue-600 transition font-medium">
-                +1 (555) 123-4567
-              </a>
-            </div>
 
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
             {/* WhatsApp */}
-            <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-2xl p-10 text-center hover:shadow-xl transition-all duration-300 border border-green-100 hover:border-green-300">
-              <MessageCircle className="h-14 w-14 text-green-600 mx-auto mb-6" />
-              <h4 className="text-xl font-bold text-gray-900 mb-3">WhatsApp</h4>
-              <a
-                href="https://wa.me/?text=Hello%20I%20would%20like%20to%20know%20more"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-700 hover:text-green-600 transition font-semibold"
-              >
-                Send Message
-              </a>
-            </div>
+            <a
+              href="https://wa.me/?text=I%27d%20like%20to%20discuss%20building%20a%20website%20for%20my%20business"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 hover:border-green-500 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 group"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 group-hover:bg-green-500 text-green-600 group-hover:text-white mb-4 transition-all duration-300">
+                <MessageCircle className="w-8 h-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">WhatsApp</h3>
+              <p className="text-gray-600 mb-4">Message me directly</p>
+              <span className="text-green-600 font-semibold group-hover:text-green-700">Start Chat</span>
+            </a>
+
+            {/* Phone */}
+            <a
+              href="tel:+15551234567"
+              className="bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-200 hover:border-blue-500 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 group"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 group-hover:bg-blue-500 text-blue-600 group-hover:text-white mb-4 transition-all duration-300">
+                <Phone className="w-8 h-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Phone</h3>
+              <p className="text-gray-600 mb-4">Call me anytime</p>
+              <span className="text-blue-600 font-semibold group-hover:text-blue-700">+1 (555) 123-4567</span>
+            </a>
 
             {/* Instagram */}
-            <div className="bg-gradient-to-br from-pink-50 to-rose-100 rounded-2xl p-10 text-center hover:shadow-xl transition-all duration-300 border border-pink-100 hover:border-pink-300">
-              <Instagram className="h-14 w-14 text-pink-600 mx-auto mb-6" />
-              <h4 className="text-xl font-bold text-gray-900 mb-3">Instagram</h4>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-700 hover:text-pink-600 transition font-semibold"
-              >
-                @business
-              </a>
-            </div>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-br from-pink-50 to-rose-50 border-2 border-pink-200 hover:border-pink-500 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 group"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-pink-100 group-hover:bg-pink-500 text-pink-600 group-hover:text-white mb-4 transition-all duration-300">
+                <Instagram className="w-8 h-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Instagram</h3>
+              <p className="text-gray-600 mb-4">Follow my work</p>
+              <span className="text-pink-600 font-semibold group-hover:text-pink-700">@webcraft.design</span>
+            </a>
           </div>
 
-          {/* Contact Form */}
-          <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-10 md:p-12 shadow-lg border border-gray-200">
-            <h4 className="text-3xl font-bold text-gray-900 mb-8">Send us a Message</h4>
+          {/* Email Form */}
+          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl border-2 border-blue-200 p-8 md:p-12">
+            <h3 className="text-3xl font-bold text-gray-900 mb-8">Or Send Me An Email</h3>
             <form className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <input
                   type="text"
                   placeholder="Your Name"
-                  className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
+                  className="px-6 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-lg transition text-lg"
                   required
                 />
                 <input
                   type="email"
                   placeholder="Your Email"
-                  className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
+                  className="px-6 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-lg transition text-lg"
                   required
                 />
               </div>
               <input
                 type="text"
-                placeholder="Subject"
-                className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
+                placeholder="Business Name"
+                className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-lg transition text-lg"
                 required
               />
               <textarea
-                placeholder="Your Message"
-                rows="5"
-                className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition resize-none"
+                placeholder="Tell me about your project..."
+                rows="6"
+                className="w-full px-6 py-4 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-600 focus:shadow-lg transition text-lg resize-none"
                 required
               ></textarea>
-              <div>
-                <button
-                  type="submit"
-                  className="w-full md:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-4 px-10 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
-                >
-                  Send Message
-                </button>
-              </div>
+              <button
+                type="submit"
+                className="w-full md:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-lg"
+              >
+                Send Message
+              </button>
             </form>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-gray-900 to-gray-800 text-white py-16">
+      <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div className="space-y-3">
-              <h5 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">Your Business</h5>
-              <p className="text-gray-400 leading-relaxed font-light">Quality service. Exceptional results.</p>
+          <div className="grid md:grid-cols-4 gap-12 mb-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+                  <Code className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold">WebCraft</h3>
+              </div>
+              <p className="text-gray-400">Building beautiful websites for small businesses</p>
             </div>
             <div>
-              <h5 className="text-lg font-bold mb-6 text-white">Quick Links</h5>
-              <ul className="space-y-3 text-gray-400">
-                <li><button onClick={() => scrollToSection('hero')} className="hover:text-blue-400 transition duration-200 font-medium">Home</button></li>
-                <li><button onClick={() => scrollToSection('about')} className="hover:text-blue-400 transition duration-200 font-medium">About</button></li>
-                <li><button onClick={() => scrollToSection('services')} className="hover:text-blue-400 transition duration-200 font-medium">Services</button></li>
-                <li><button onClick={() => scrollToSection('contact')} className="hover:text-blue-400 transition duration-200 font-medium">Contact</button></li>
+              <h4 className="text-lg font-bold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><button onClick={() => scrollToSection('hero')} className="hover:text-blue-400 transition">Home</button></li>
+                <li><button onClick={() => scrollToSection('about')} className="hover:text-blue-400 transition">About</button></li>
+                <li><button onClick={() => scrollToSection('services')} className="hover:text-blue-400 transition">Services</button></li>
+                <li><button onClick={() => scrollToSection('contact')} className="hover:text-blue-400 transition">Contact</button></li>
               </ul>
             </div>
             <div>
-              <h5 className="text-lg font-bold mb-6 text-white">Services</h5>
-              <ul className="space-y-3 text-gray-400">
-                <li><a href="#services" className="hover:text-blue-400 transition duration-200 font-medium">Consulting</a></li>
-                <li><a href="#services" className="hover:text-blue-400 transition duration-200 font-medium">Planning</a></li>
-                <li><a href="#services" className="hover:text-blue-400 transition duration-200 font-medium">Support</a></li>
+              <h4 className="text-lg font-bold mb-4">Services</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#services" className="hover:text-blue-400 transition">Custom Design</a></li>
+                <li><a href="#services" className="hover:text-blue-400 transition">Responsive Layout</a></li>
+                <li><a href="#services" className="hover:text-blue-400 transition">Easy Updates</a></li>
+                <li><a href="#services" className="hover:text-blue-400 transition">Deployment</a></li>
               </ul>
             </div>
             <div>
-              <h5 className="text-lg font-bold mb-6 text-white">Follow Us</h5>
-              <ul className="space-y-3 text-gray-400">
-                <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition duration-200 font-medium">Instagram</a></li>
-                <li><a href="https://wa.me" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition duration-200 font-medium">WhatsApp</a></li>
+              <h4 className="text-lg font-bold mb-4">Follow</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400 transition">Instagram</a></li>
+                <li><a href="https://wa.me" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition">WhatsApp</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-700 pt-10 text-center text-gray-500">
-            <p>&copy; {currentYear} Your Business. All rights reserved.</p>
+          <div className="border-t border-gray-800 pt-8 text-center text-gray-500">
+            <p>&copy; {currentYear} WebCraft. All rights reserved.</p>
           </div>
         </div>
       </footer>
